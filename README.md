@@ -63,13 +63,14 @@ Key HTML templates:
 
 ## 6. Challenges Faced and Solutions
 
-| Challenge                         | Solution                                                                 |
-|----------------------------------|--------------------------------------------------------------------------|
-| User session security            | Implemented JWT in cookies with expiration and secret key                |
-| File upload safety               | Used `secure_filename` and validated file extensions                     |
-| Password storage                 | Applied `werkzeug.security` for password hashing and validation          |
-| Access control for posts/profile | Used `@jwt_required` decorators and user ID checks                       |
-| No Blueprints used               | Modular logic and route handling for separation of concerns              |
+| Challenge                        | Solution                                                        |
+|----------------------------------|-----------------------------------------------------------------|
+| User session security            | Implemented JWT in cookies with expiration and secret key       |
+| File upload safety               | Used `secure_filename` and validated file extensions            |
+| Password storage                 | Applied `werkzeug.security` for password hashing and validation |
+| Access control for posts/profile | Used `@jwt_required` decorators and user ID checks              |
+| Blueprints                       | Modular logic and route handling for separation of concerns     |
+| API Hugging Face                 | Analyzing tone of hte comments by using ai                      |
 
 ---
 
