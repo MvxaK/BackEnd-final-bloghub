@@ -1,0 +1,39 @@
+{% extends "main.html" %}
+{% block title %}Moderate Comments{% endblock %}
+{% block content %}
+<div class="container my-5">
+    <h3>Moderate Comments for "{{ post.title }}"</h3>
+    <hr>
+    {% if comments %}
+        {% for comment in comments %}
+            <div class="card mb-3" style="
+                {% if comment.sentiment == 'Very Positive' %} background-color: #d4f8d4;
+                {% elif comment.sentiment == 'Positive' %} background-color: #e2fbe2;
+                {% elif comment.sentiment == 'Neutral' %} background-color: #eef2f7;
+                {% elif comment.sentiment == 'Negative' %} background-color: #ffe8cc;
+                {% elif comment.sentiment == 'Very Negative' %} background-color: #fddcdc;
+                {% endif %}">
+                <div class="card-body d-flex align-items-start">
+                    <img src="{{ url_for('static', filename='uploads/avatars/' + (comment.author.avatar or 'default.png')) }}"
+                         alt="avatar"
+                         class="rounded-circle me-3"
+                         style="width: 50px; height: 50px; object-fit: cover;">
+                    <div>
+                        <p><strong>{{ comment.author.username }}</strong>:</p>
+                        <p>{{ comment.content }}</p>
+                        {% if comment.sentiment %}
+                            <small>Sentiment analyzed by AI: <strong>{{ comment.sentiment }}</strong></small><br>
+                        {% endif %}
+                        <a href="{{ url_for('approve_comment', comment_id=comment.id) }}" class="btn btn-success btn-sm mt-2">Approve</a>
+                        <a href="{{ url_for('reject_comment', comment_id=comment.id) }}" class="btn btn-danger btn-sm mt-2"
+                           onclick="return confirm('Reject and delete this comment?');">Reject</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="text-muted">No comments awaiting moderation.</p>
+    {% endif %}
+    <a href="{{ url_for('profile') }}" class="btn btn-secondary mt-3">← Back to profile</a>
+</div>
+{% endblock %}
